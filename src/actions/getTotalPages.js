@@ -1,5 +1,5 @@
-import axios from '../../axios-instance';
-import * as actionTypes from './actionTypes';
+import axios from '../axios-instance'
+import * as actionTypes from './types/actionTypes';
 
 export const getPagesStart = () => {
     return {

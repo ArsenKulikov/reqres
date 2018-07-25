@@ -6,8 +6,8 @@ import thunk from 'redux-thunk';
 
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
-import usersReducer from './store/reducers/fetchUsers';
-import pagesReducer from './store/reducers/getTotalPages';
+import usersReducer from './reducers/fetchUsers';
+import pagesReducer from './reducers/getTotalPages';
 
 const composeEnchancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
