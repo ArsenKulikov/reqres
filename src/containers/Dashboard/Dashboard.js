@@ -13,14 +13,12 @@ class Dashboard extends Component {
     render() {
         let buttons = <Spinner />;
         if ( !this.props.loading ) {
-            buttons = [];
-            for (let page = 1; page <= this.props.totalPages; page++){
-                const button = (<button
+            buttons = Array.from(Array(this.props.totalPages).keys()).map( page => {
+                page++
+                return (<button
                     key={page}
                     onClick={() => this.props.onGetUsersByPage(page)}>Page: {page}</button>)
-                buttons.push(button)
-            }
-               
+            })
         }
         return (
             <div>

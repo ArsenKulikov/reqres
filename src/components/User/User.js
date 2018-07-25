@@ -4,8 +4,7 @@ const User = (props) => {
   return (
     <div>
       <img src={props.photo} alt={''}/>
-      <p>{props.firstName}</p>
-      <p>{props.lastName}</p>
+      <p>{props.firstName} {props.lastName}</p>
     </div>
   )
 }

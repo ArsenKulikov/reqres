@@ -63,24 +63,26 @@ export const getAllUsers = (totalPages) => {
     return dispatch => {
         dispatch(fetchAllUsersStart());
         
-        const promises = [];
-        for (let page = 1; page <= totalPages; page++) {
-            promises.push(axios.get('?page=' + page))
-        };
+        const promises = Array.from(Array(totalPages).keys()).map( page => {
+            return axios.get('?page=' + `${page + 1}`)
+        })
+
         Promise.all(promises)
             .then( res => {
-                let data = [];
+                console.log(res.data)
+                let data = []
                 for (const key in res) {
                     if (res.hasOwnProperty(key)) {
                         const response = res[key].data.data;
                         data.push(response)                    
                     }
                 }
+
                 return data
             })
             .then( data => {
                 const users = data.reduce((acc, el) => acc.concat(el), [])
-                console.log(users)
+
                 dispatch(fetchAllUsersSuccess(users));
             })
     };

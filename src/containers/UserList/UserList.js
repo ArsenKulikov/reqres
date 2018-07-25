@@ -10,24 +10,16 @@ export class UserList extends Component {
     let users = <Spinner />
     
     if (!this.props.loading) {
-
-      const data = this.props.users
-      console.log(this.props.users)
-      users = []
-      for (let key in data) {
-          let user = data[key];
-          
-          users.push(
-              <User
-                className="User"
-                firstName={user.first_name}
-                lastName={user.last_name}
-                photo={user.avatar}
-                key={user.id} /> 
-          )
-          
-        }
-         
+      users = this.props.users.map( user => {
+        return (
+          <User
+            className="User"
+            firstName={user.first_name}
+            lastName={user.last_name}
+            photo={user.avatar}
+            key={user.id} /> 
+        )
+      })      
     }
     return <div>{users}</div>
   }
