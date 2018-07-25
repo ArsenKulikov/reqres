@@ -3,7 +3,7 @@ import * as actionTypes from '../actions/types/actionTypes'
 const initialState = {
     users: [],
     loading: false,
-    //error: null
+    totalPages: null
 }
 
 const reducer = (state = initialState, action) => {
@@ -40,6 +40,23 @@ const reducer = (state = initialState, action) => {
                 loading: false,
                 users: action.users
             });
+            case actionTypes.INITIAL_REQUEST_START:
+            return {
+                ...state,
+                loading: true
+            }
+        case actionTypes.INITIAL_REQUEST_FAIL:
+            return {
+                ...state,
+                loading: false,
+            }
+        case actionTypes.INITIAL_REQUEST_SUCCESS:
+            return {
+                ...state,
+                totalPages: action.totalPages,
+                loading: false,
+                users: action.users
+            }
 
         default: return state
     }

@@ -5,14 +5,14 @@ import Dashboard from '../../components/Dashboard/Dashboard';
 
 
 const mapStateToProps = (state) => ({
-    totalPages: state.pages.totalPages,
-    loading: state.pages.loading,
-    users: state.users.users  
+    totalPages: state.totalPages,
+    loading: state.loading,
+    users: state.users  
 })
 
 const mapDispatchToProps = dispatch => {
     return {
-        onGetPages: () => dispatch(actions.getTotalPages()),
+        onInitialRequest: (totalPages, users) => dispatch(actions.initialRequest(totalPages, users)),
         onGetUsersByPage: (page) => dispatch(actions.fetchUsersByPage(page)),
         onGetAllUsers: (totalPages) => dispatch(actions.getAllUsers(totalPages))
     }

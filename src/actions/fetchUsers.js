@@ -42,6 +42,43 @@ export const fetchAllUsersSuccess = (users) => {
     } 
 };
 
+export const initialRequestStart = () => {
+    return {
+        type: actionTypes.INITIAL_REQUEST_START
+    };
+};
+
+export const initialRequestFail = (error) => {
+    return {
+        type: actionTypes.INITIAL_REQUEST_FAIL,
+        error: error
+    };
+};
+
+export const initialRequestSuccess = (totalPages, users) => {
+    return {
+        type: actionTypes.INITIAL_REQUEST_SUCCESS,
+        totalPages: totalPages,
+        users: users
+    }
+}
+
+export const initialRequest = () => {
+    return dispatch => {
+        dispatch(initialRequestStart());
+        axios.get()
+            .then(res => {
+                const pagesCount = res.data.total_pages
+                const users = res.data.data
+                console.log(users)
+                const totalPages = Array.from(Array(pagesCount).keys())
+                dispatch(initialRequestSuccess(totalPages, users))
+            })
+            .catch( err => {
+                dispatch(initialRequestFail(err))
+            })
+    }
+}
 
 
 export const fetchUsersByPage = (page) => {
@@ -63,7 +100,7 @@ export const getAllUsers = (totalPages) => {
     return dispatch => {
         dispatch(fetchAllUsersStart());
         
-        const promises = Array.from(Array(totalPages).keys()).map( page => {
+        const promises = totalPages.map( page => {
             return axios.get('?page=' + `${page + 1}`)
         })
 

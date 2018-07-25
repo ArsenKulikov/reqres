@@ -4,10 +4,16 @@ import User from '../../components/User/User';
 import Spinner from '../../components/UI/Spinner/Spinner';
 
 export class UserList extends Component {
+
+  shouldComponentUpdate (nextProps, nextState) {
+    return this.props.users !== nextProps.users
+}
+  
   render() {
     let users = <Spinner />
     
     if (!this.props.loading) {
+      console.log(this.props)
       users = this.props.users.map( user => {
         return (
           <User
@@ -17,7 +23,7 @@ export class UserList extends Component {
             photo={user.avatar}
             key={user.id} /> 
         )
-      })      
+      })
     }
     return <div>{users}</div>
   }

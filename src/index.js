@@ -6,18 +6,18 @@ import thunk from 'redux-thunk';
 
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
-import usersReducer from './reducers/fetchUsers';
-import pagesReducer from './reducers/getTotalPages';
+import reducer from './reducers/fetchUsers';
+// import pagesReducer from './reducers/getTotalPages';
 
 const composeEnchancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-const rootReducer = combineReducers({
-    users: usersReducer,
-    pages: pagesReducer,
-    // allUsers: allUsersReducer
-})
+// const rootReducer = combineReducers({
+//     users: usersReducer,
+//     pages: pagesReducer,
+//     // allUsers: allUsersReducer
+// })
 
-const store = createStore(rootReducer, composeEnchancers(applyMiddleware(thunk)));
+const store = createStore(reducer, composeEnchancers(applyMiddleware(thunk)));
 
 ReactDOM.render(
     <Provider store={store}>

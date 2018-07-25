@@ -1,3 +1,2 @@
-export { getTotalPages } from './getTotalPages';
-export { fetchUsersByPage, getAllUsers } from './fetchUsers';
+export { fetchUsersByPage, getAllUsers, initialRequest } from './fetchUsers';
 // export { getAllUsers } from './fetchAllUsers';

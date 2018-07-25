@@ -7,27 +7,34 @@ import Spinner from '../../components/UI/Spinner/Spinner';
 class Dashboard extends Component {
     
     componentDidMount () {
-        this.props.onGetPages();
+        this.props.onInitialRequest();
+    }
+
+    shouldComponentUpdate (nextProps, nextState) {
+        return this.props.totalPages !== nextProps.totalPages
     }
     
     render() {
-        let buttons = <Spinner />;
-        if ( !this.props.loading ) {
-            buttons = Array.from(Array(this.props.totalPages).keys()).map( page => {
+        
+        if ( !this.props.loading && this.props.totalPages !== null ) {
+            let buttons = this.props.totalPages.map( page => {
                 page++
                 return (<button
                     key={page}
                     onClick={() => this.props.onGetUsersByPage(page)}>Page: {page}</button>)
             })
+            return (
+                <div>
+                    {buttons}
+                    <button 
+                        onClick={() => this.props.onGetAllUsers(this.props.totalPages)}>
+                        ALL USERS
+                    </button>
+                </div>
+            )
         }
         return (
-            <div>
-                {buttons}
-                <button 
-                    onClick={() => this.props.onGetAllUsers(this.props.totalPages)}>
-                    ALL USERS
-                </button>
-            </div>
+            <h3>Loading...</h3>
         )
     }
 }
